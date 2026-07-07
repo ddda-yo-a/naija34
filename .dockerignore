@@ -1,0 +1,33 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets — never bake these into the image
+.env
+.env.*
+!.env.example
+
+# Tests and dev tooling
+tests/
+coverage/
+vitest.config.js
+*.test.js
+
+# Git
+.git/
+.gitignore
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs
+*.md
+!README.md
