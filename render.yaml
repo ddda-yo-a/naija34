@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: naija34-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: node src/server.js
+    healthCheckPath: /health
+
+    envVars:
+      # ── Non-secret config ────────────────────────────────────────────────────
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: API_PREFIX
+        value: /api/v1
+      - key: TRUST_PROXY
+        value: 1
+      - key: ACCESS_TOKEN_TTL_MINUTES
+        value: 15
+      - key: REFRESH_TOKEN_TTL_DAYS
+        value: 30
+      - key: REGISTRATION_TOKEN_TTL_MINUTES
+        value: 30
+      - key: OTP_TTL_MINUTES
+        value: 10
+      - key: OTP_RESEND_SECONDS
+        value: 60
+      - key: OTP_MAX_ATTEMPTS
+        value: 5
+      - key: EMAIL_DELIVERY_MODE
+        value: smtp
+      - key: EMAIL_FROM
+        value: "34th Street <support@34thstreet.net>"
+      - key: SMTP_HOST
+        value: smtp.sendgrid.net
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        value: support@34thstreet.net
+      - key: CORS_ORIGINS
+        value: ""
+
+      # ── Secrets — set these manually in the Render dashboard ─────────────────
+      # Never commit real values here. Use Render's "Secret Files" or env var UI.
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: OTP_PEPPER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
